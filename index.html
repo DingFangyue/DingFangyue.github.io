@@ -4,9 +4,467 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我的个人网站</title>
+    <style>
+        :root {
+            --bg: #f9fafb;
+            --card-bg: #ffffff;
+            --text: #1f2937;
+            --text-secondary: #6b7280;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --border: #e5e7eb;
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.04);
+            --radius: 12px;
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+        }
+
+        /* ---- 导航栏 ---- */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            transition: var(--transition);
+        }
+
+        .navbar-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+        }
+
+        .nav-logo {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            transition: var(--transition);
+        }
+        .nav-logo:hover {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 6px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: var(--transition);
+            letter-spacing: -0.01em;
+        }
+        .nav-links a:hover {
+            color: var(--accent);
+            background: rgba(59, 130, 246, 0.06);
+        }
+
+        /* ---- 主体容器 ---- */
+        .container {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 40px 24px 60px;
+        }
+
+        /* ---- 英雄区域 ---- */
+        .hero {
+            text-align: center;
+            padding: 50px 20px 40px;
+        }
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 2.8rem;
+            color: #fff;
+            font-weight: 700;
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.3);
+            user-select: none;
+            letter-spacing: -0.03em;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            margin-bottom: 10px;
+            color: #111827;
+        }
+
+        .hero .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            font-weight: 400;
+        }
+
+        .hero .tagline {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 6px 18px;
+            background: rgba(59, 130, 246, 0.08);
+            color: var(--accent);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .hero .social-links {
+            margin-top: 22px;
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 9px 18px;
+            border-radius: 24px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            letter-spacing: -0.01em;
+        }
+        .social-btn:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-1px);
+        }
+        .social-btn .icon-svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        /* ---- 分区卡片 ---- */
+        .section {
+            margin-top: 36px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 18px;
+            padding-left: 4px;
+            color: #111827;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 24px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 26px 28px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            margin-bottom: 18px;
+        }
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+        .card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 4px;
+            color: #111827;
+        }
+        .card .meta {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            letter-spacing: -0.01em;
+        }
+        .card p {
+            color: #4b5563;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* 技能标签 */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 6px;
+        }
+        .skill-tag {
+            background: #f3f4f6;
+            color: #374151;
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 0.88rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+        .skill-tag:hover {
+            background: rgba(59, 130, 246, 0.08);
+            border-color: rgba(59, 130, 246, 0.3);
+            color: var(--accent);
+        }
+
+        /* 时间线 */
+        .timeline-item {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 22px;
+            border-left: 2px solid var(--border);
+            padding-bottom: 6px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 2px solid #fff;
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+        .timeline-item .date {
+            font-size: 0.82rem;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 2px;
+        }
+        .timeline-item h4 {
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: -0.02em;
+            color: #111827;
+        }
+        .timeline-item p {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-top: 2px;
+        }
+
+        /* ---- 页脚 ---- */
+        .footer {
+            text-align: center;
+            padding: 32px 24px;
+            color: #9ca3af;
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 20px;
+            letter-spacing: -0.01em;
+        }
+        .footer span {
+            color: var(--accent);
+        }
+
+        /* ---- 响应式 ---- */
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .avatar {
+                width: 88px;
+                height: 88px;
+                font-size: 2.2rem;
+            }
+            .navbar-inner {
+                height: 50px;
+            }
+            .nav-links a {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+            .card {
+                padding: 20px 18px;
+            }
+            .container {
+                padding: 24px 14px 40px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>你好，世界！</h1>
-    <p>欢迎来到我的第一个个人网站。这里是使用 GitHub Pages 搭建的。</p>
+
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="#" class="nav-logo">🧑‍💻 MySite</a>
+            <ul class="nav-links">
+                <li><a href="#about">关于</a></li>
+                <li><a href="#skills">技能</a></li>
+                <li><a href="#projects">项目</a></li>
+                <li><a href="#experience">经历</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 主体内容 -->
+    <div class="container">
+
+        <!-- 英雄区域：个人介绍 -->
+        <section class="hero" id="about">
+            <div class="avatar">张</div>
+            <h1>张三</h1>
+            <p class="subtitle">全栈开发工程师 · 终身学习者</p>
+            <p class="tagline">🚀 热衷于构建优雅、实用的数字产品</p>
+            <div class="social-links">
+                <!-- GitHub -->
+                <a href="https://github.com" target="_blank" rel="noopener" class="social-btn">
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.418-1.305.762-1.604-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12 24 5.37 18.63 0 12 0z"/></svg>
+                    GitHub
+                </a>
+                <!-- 邮箱 -->
+                <a href="mailto:hello@example.com" class="social-btn">
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 4-10 8L2 4"/></svg>
+                    邮箱
+                </a>
+                <!-- 博客 -->
+                <a href="#" class="social-btn">
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9-9"/><path d="M4 11v6a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-6"/><path d="M12 12v.01"/><path d="M8 17h8"/></svg>
+                    博客
+                </a>
+            </div>
+        </section>
+
+        <!-- 技能区域 -->
+        <section class="section" id="skills">
+            <h2 class="section-title">技术栈</h2>
+            <div class="card">
+                <h3>🛠️ 我常用的技术与工具</h3>
+                <p style="margin-bottom:12px;">以下是我在日常开发中频繁使用的一些技术，涵盖前端、后端以及开发工具。</p>
+                <div class="skills-grid">
+                    <span class="skill-tag">HTML5 / CSS3</span>
+                    <span class="skill-tag">JavaScript (ES6+)</span>
+                    <span class="skill-tag">TypeScript</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">Vue.js</span>
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Git & GitHub</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">MySQL / PostgreSQL</span>
+                    <span class="skill-tag">Tailwind CSS</span>
+                    <span class="skill-tag">VS Code</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 项目区域 -->
+        <section class="section" id="projects">
+            <h2 class="section-title">精选项目</h2>
+
+            <div class="card">
+                <h3>📋 任务管理应用</h3>
+                <p class="meta">React · TypeScript · Node.js · 2024</p>
+                <p>一个全栈任务管理工具，支持拖拽排序、标签分类、截止日期提醒以及团队协作功能。采用 RESTful API 设计，前后端分离架构，部署在云服务器上。</p>
+            </div>
+
+            <div class="card">
+                <h3>🌐 个人博客系统</h3>
+                <p class="meta">Vue.js · Markdown · GitHub Pages · 2024</p>
+                <p>基于 VuePress 的静态博客，支持 Markdown 写作、标签归档、RSS 订阅和暗色模式。自动通过 GitHub Actions 部署，实现了轻量且高速的阅读体验。</p>
+            </div>
+
+            <div class="card">
+                <h3>📊 数据可视化仪表盘</h3>
+                <p class="meta">Python · Flask · ECharts · 2023</p>
+                <p>一个用于展示业务数据趋势的仪表盘，包含多种图表类型和可交互的筛选器。后端使用 Flask 提供数据接口，前端通过 ECharts 渲染动态图表。</p>
+            </div>
+        </section>
+
+        <!-- 经历区域 -->
+        <section class="section" id="experience">
+            <h2 class="section-title">经历 & 教育</h2>
+            <div class="card">
+                <div class="timeline-item">
+                    <div class="date">2024 年 3 月 — 至今</div>
+                    <h4>前端开发工程师 @ 某科技有限公司</h4>
+                    <p>负责公司核心产品的前端架构设计与迭代，使用 React + TypeScript 技术栈，优化页面性能并提升用户体验。</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="date">2023 年 7 月 — 2024 年 2 月</div>
+                    <h4>实习开发工程师 @ 创新软件工作室</h4>
+                    <p>参与多个 Web 应用的开发与维护，编写单元测试，协助完成 CI/CD 流水线的搭建。</p>
+                </div>
+                <div class="timeline-item" style="margin-bottom:0; border-left-color: transparent;">
+                    <div class="date">2020 年 9 月 — 2024 年 6 月</div>
+                    <h4>计算机科学与技术 · 本科</h4>
+                    <p>某大学 · 主修数据结构、算法设计、操作系统、计算机网络等课程。</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <p>© 2024 <span>张三</span> · 使用 GitHub Pages 搭建 · 保留所有权利</p>
+        <p style="margin-top:4px;">感谢来访 💙</p>
+    </footer>
+
 </body>
 </html>
