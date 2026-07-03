@@ -17,8 +17,9 @@
             --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.04);
             --radius: 12px;
             --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            --sidebar-width: 290px;
-            --content-gap: 34px;
+            --sidebar-width: 300px;
+            --content-gap: 40px;
+            --page-max-width: 1300px;
         }
 
         * {
@@ -50,17 +51,17 @@
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border);
-            padding: 0 24px;
+            padding: 0 32px;
             transition: var(--transition);
         }
 
         .navbar-inner {
-            max-width: 960px;
+            max-width: var(--page-max-width);
             margin: 0 auto;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 56px;
+            height: 60px;
         }
 
         .nav-logo {
@@ -101,9 +102,9 @@
 
         /* ---- 主体容器 ---- */
         .container {
-            max-width: 940px;
+            max-width: var(--page-max-width);
             margin: 0 auto;
-            padding: 36px 24px 60px;
+            padding: 40px 32px 64px;
         }
 
         /* ---- 双栏布局 ---- */
@@ -117,11 +118,11 @@
         /* ---- 侧边栏 ---- */
         .sidebar {
             position: sticky;
-            top: 80px;
+            top: 88px;
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 30px 26px 26px;
+            padding: 32px 28px 28px;
             box-shadow: var(--shadow);
             transition: var(--transition);
             text-align: center;
@@ -170,10 +171,10 @@
         }
 
         .sidebar .bio {
-            font-size: 0.9rem;
+            font-size: 0.92rem;
             color: var(--text-secondary);
-            line-height: 1.65;
-            margin-bottom: 16px;
+            line-height: 1.7;
+            margin-bottom: 18px;
             letter-spacing: -0.01em;
         }
 
@@ -181,7 +182,7 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
 
         .sidebar .social-btn {
@@ -217,7 +218,7 @@
         .sidebar .sidebar-divider {
             border: none;
             border-top: 1px solid var(--border);
-            margin: 18px 0 16px;
+            margin: 20px 0 18px;
         }
 
         .sidebar .section-title {
@@ -272,7 +273,7 @@
         }
 
         .section {
-            margin-bottom: 34px;
+            margin-bottom: 36px;
         }
         .section:last-child {
             margin-bottom: 0;
@@ -303,7 +304,7 @@
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 26px 28px;
+            padding: 28px 32px;
             box-shadow: var(--shadow);
             transition: var(--transition);
             margin-bottom: 18px;
@@ -316,29 +317,29 @@
             transform: translateY(-2px);
         }
         .card h3 {
-            font-size: 1.15rem;
+            font-size: 1.18rem;
             font-weight: 700;
             letter-spacing: -0.02em;
             margin-bottom: 4px;
             color: #111827;
         }
         .card .meta {
-            font-size: 0.85rem;
+            font-size: 0.87rem;
             color: var(--text-secondary);
             margin-bottom: 10px;
             letter-spacing: -0.01em;
         }
         .card p {
             color: #4b5563;
-            font-size: 0.95rem;
-            line-height: 1.7;
+            font-size: 0.97rem;
+            line-height: 1.75;
         }
 
         /* 时间线 */
         .timeline-item {
             position: relative;
             padding-left: 28px;
-            margin-bottom: 22px;
+            margin-bottom: 24px;
             border-left: 2px solid var(--border);
             padding-bottom: 6px;
         }
@@ -355,7 +356,7 @@
             box-shadow: 0 0 0 2px var(--accent);
         }
         .timeline-item .date {
-            font-size: 0.82rem;
+            font-size: 0.84rem;
             color: var(--accent);
             font-weight: 600;
             letter-spacing: -0.01em;
@@ -363,20 +364,23 @@
         }
         .timeline-item h4 {
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 1.02rem;
             letter-spacing: -0.02em;
             color: #111827;
         }
         .timeline-item p {
             color: #6b7280;
-            font-size: 0.9rem;
+            font-size: 0.92rem;
             margin-top: 2px;
+            line-height: 1.7;
         }
 
         /* ---- 页脚 ---- */
         .footer {
+            max-width: var(--page-max-width);
+            margin: 0 auto;
             text-align: center;
-            padding: 32px 24px;
+            padding: 32px 32px;
             color: #9ca3af;
             font-size: 0.85rem;
             border-top: 1px solid var(--border);
@@ -388,7 +392,7 @@
         }
 
         /* ---- 响应式：平板及以下切换为单栏 ---- */
-        @media (max-width: 820px) {
+        @media (max-width: 900px) {
             .main-layout {
                 grid-template-columns: 1fr;
                 gap: 28px;
@@ -436,6 +440,14 @@
             .sidebar .name {
                 font-size: 1.4rem;
             }
+
+            .container {
+                padding: 24px 20px 40px;
+            }
+
+            .navbar {
+                padding: 0 20px;
+            }
         }
 
         @media (max-width: 640px) {
@@ -443,17 +455,17 @@
                 height: 50px;
             }
             .nav-logo {
-                font-size: 1.15rem;
+                font-size: 1.1rem;
             }
             .nav-links a {
-                padding: 6px 11px;
-                font-size: 0.82rem;
+                padding: 6px 10px;
+                font-size: 0.8rem;
             }
             .container {
-                padding: 20px 12px 36px;
+                padding: 16px 10px 32px;
             }
             .sidebar {
-                padding: 20px 16px 18px;
+                padding: 20px 14px 16px;
                 border-radius: 10px;
             }
             .sidebar .avatar {
@@ -468,23 +480,23 @@
                 font-size: 0.85rem;
             }
             .sidebar .social-btn {
-                font-size: 0.84rem;
-                padding: 8px 14px;
-                min-width: 110px;
+                font-size: 0.82rem;
+                padding: 8px 12px;
+                min-width: 100px;
             }
             .sidebar .section-title {
-                font-size: 1.1rem;
+                font-size: 1.05rem;
             }
             .skill-tag {
-                font-size: 0.8rem;
-                padding: 6px 11px;
+                font-size: 0.78rem;
+                padding: 6px 10px;
             }
             .card {
-                padding: 18px 16px;
+                padding: 18px 14px;
                 border-radius: 10px;
             }
             .section-title {
-                font-size: 1.3rem;
+                font-size: 1.25rem;
             }
             .card h3 {
                 font-size: 1.05rem;
@@ -493,18 +505,21 @@
                 font-size: 0.9rem;
             }
             .timeline-item {
-                padding-left: 22px;
+                padding-left: 20px;
                 margin-bottom: 16px;
             }
             .timeline-item h4 {
-                font-size: 0.95rem;
+                font-size: 0.93rem;
             }
             .timeline-item p {
-                font-size: 0.84rem;
+                font-size: 0.83rem;
             }
             .footer {
                 font-size: 0.78rem;
-                padding: 24px 16px;
+                padding: 22px 14px;
+            }
+            .navbar {
+                padding: 0 12px;
             }
         }
     </style>
@@ -621,8 +636,7 @@
 
     <!-- 页脚 -->
     <footer class="footer">
-        <p>© 2024 <span>丁方跃</span> · 使用 GitHub Pages 搭建 · 保留所有权利</p>
-        <p style="margin-top:4px;">感谢来访 💙</p>
+        <p>使用 GitHub Pages 搭建 · 保留所有权利</p>
     </footer>
 
 </body>
